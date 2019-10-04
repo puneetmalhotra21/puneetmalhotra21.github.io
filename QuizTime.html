@@ -40,11 +40,11 @@
 			<form>
 				<div class="form-group">
 				  <label for="usr">Fill Formula:</label>
-				  <input type="text" class="form-control ans" id="usrFrmla"><br/>
+				  <input type="text" class="form-control ans" id="usrFrmla" onkeyup="eval()"><br/>
 				  <input  class="form-control vrfans" id="frmla" style="display:none">
 				</div>
-				<button type="button" id="nxtbtn" class="btn btn-link">Next</button>
-		
+				<!-- <button type="button" id="nxtbtn" class="btn btn-link">Next</button>  -->
+		        <button type="button" id="strtbtn" class="btn btn-link" onclick="strtDrl()">Start</button>
 			</form>
 		</div>
       </div>
@@ -216,120 +216,129 @@
     </div>
     </div>
   </div>
-  <script source="">
-  </script>
+  
+  
+    <!-- Reaction Drill Object using Google Sheet -->
 <script>
-		var count=0;
-		var frmlaList= new Array();
-		var myobj;
-		myobj= new Object();
-		myobj.unit= 'Water'
-		myobj.formula='H20';
-		myobj.wrngFrmla="";
+    var count=0;
+	var frmlaList= new Array();
+	var myobj = {unit:'',formula:'',wrngFrml:''};
+	
+    var spreadsheetUrl = 'https://spreadsheets.google.com/feeds/cells/1awT3kORg7Y9lIaOBTatsGANgv42mtsPSBERWyMwSHRo/1/public/values?alt=json-in-script&callback=doData';
 
-		frmlaList.push(myobj);
 
-		myobj= new Object();
-		myobj.unit= 'Calcium Carbonate'
-		myobj.formula='CaCo3';
-		myobj.wrngFrmla="";
+   
+function doData(data) {
+    var results = [];
 
-		frmlaList.push(myobj);
-		myobj= new Object();
-		myobj.unit= 'Hydrocholric Acide'
-		myobj.formula='HCL';
-		myobj.wrngFrmla="";
-		frmlaList.push(myobj);
+    var entries = data.feed.entry;
+    var previousRow = 0;
+    for (var i = 0; i < entries.length; i++) {
+		 results.push(entries[i].content.$t);
 
-		 $("label[for='usr']").text(frmlaList[0].unit);
+    }
+
+    handleResults(results);
+}
+		
+	function handleResults(results){
+	
+		for(var i = 2; i < results.length; i++){
+				myobj= new Object();
+				myobj.unit= results[i];
+				myobj.formula=results[i+1];
+				myobj.wrngFrmla="";
+                
+				frmlaList.push(myobj);
+				i++;
+			}
+    }		
+		
+$.ajax({
+    url: spreadsheetUrl,
+    jsonp: 'doData',
+    dataType: 'jsonp'
+}); 		
+		
+    function strtDrl(){
+	    $("label[for='usr']").text(frmlaList[0].unit);
 		 $('#frmla').val(frmlaList[0].formula);
 		 $('#usrFrmla').val(frmlaList[0].wrngFrmla); 
-		   $(document).ready(function(){
-			
-			 $("#nxtbtn").click(function() {
-				var _txt1 = $('#usrFrmla').val();
-				var _txt2 = $('#frmla').val();
-				
-				console.log('count::'+count);
-					if (_txt1 == _txt2){
-					count++;
-					console.log('count1::'+count);
-						   if(count+1<=frmlaList.length){
-							console.log('count3::'+count)
-								  $("label[for='usr']").text(frmlaList[count].unit);
-								  
-								 $('#frmla').val(frmlaList[count].formula);
-								 $('#usrFrmla').val(frmlaList[count].wrngFrmla); 
-								 return true;
-							}else{
-							console.log('Game Over');
-							}	 
-						}
-					  else
-					  {
-						console.log('Not matched!!');
-						return false;
-					  }
-				  });
-			});
-			
-			// Timer 
-			
-			var sec = 15;
-		var time = setInterval(myTimer, 1000);
-
-		function myTimer() {
-			document.getElementById('timer').innerHTML = sec + "sec left";
-			sec--;
-			if (sec == -1) {
-				clearInterval(time);
-				alert("Time out!! :(");
+		 		  
+	}
+		 	
+	// Started: Eval Logic 	
+		function eval(){
+		 console.log('count1::'+$('#usrFrmla').val());
+			var _txt1 = $('#usrFrmla').val();
+			// var _txt2 = $('#frmla').val();
+				if (_txt1.toUpperCase()  == frmlaList[count].formula.toUpperCase() ){
+				count++;
+				console.log('count1::'+count);
+					   if(count+1<=frmlaList.length){
+						console.log('count3::'+count)
+							  $("label[for='usr']").text(frmlaList[count].unit);
+							  
+							 $('#frmla').val(frmlaList[count].formula);
+							 $('#usrFrmla').val(frmlaList[count].wrngFrmla); 
+							 return true;
+						}else{
+						console.log('Game Over');
+						}	 
+					}
+				  else
+				  {
+					console.log('Not matched!!');
+					return false;
+				  }
 			}
-		}
-	// Trigo script
-	    $(document).ready(function(){
+	// Ended: Eval Logic  
+	
+	// Started: Table  		
+   $(document).ready(function(){
  
-   $("#elctrcity").on("click", function() {
-  $("#physctable").css("display", "");
-    $("#elcTbl").css("display", "");
-   $("#mgntTbl").css("display", "none");
-   $("#mathtbl").css("display", "none");
-   $("#mathtable").css("display", "none");
-   });
-   $("#mgntsm").on("click", function() {
-  $("#physctable").css("display", "");
-    $("#mgntTbl").css("display", "");
-    $("#elcTbl").css("display", "none");
-    $("#mathtbl").css("display", "none");
-    
-    $("#mathtable").css("display", "none");
-   
-   }); 
-    $("#Trgo").on("click", function() {
-  
-    $("#physctable").css("display", "none");
-   $("#mathtable").css("display", "");
-   $("#mathtbl").css("display", "");
-   
-   });
-   $("#testBtn").on("click", function() {
- 
-     $(".forTest").removeClass("onDisp").addClass("offDisp");
-     $("#ansBtn").css("display", "block");
-     $("#testBtn").css("display", "none");
-   
-   
-   });
-   $("#ansBtn").on("click", function() {
-     $(".forTest").removeClass("offDisp").addClass("onDisp");
-     $("#ansBtn").css("display", "none");
-     $("#testBtn").css("display", "block");
-   
-   
-   });
- });
+		   $("#elctrcity").on("click", function() {
+		  $("#physctable").css("display", "");
+			$("#elcTbl").css("display", "");
+		   $("#mgntTbl").css("display", "none");
+		   $("#mathtbl").css("display", "none");
+		   $("#mathtable").css("display", "none");
+		   });
+		   $("#mgntsm").on("click", function() {
+		  $("#physctable").css("display", "");
+			$("#mgntTbl").css("display", "");
+			$("#elcTbl").css("display", "none");
+			$("#mathtbl").css("display", "none");
+			
+			$("#mathtable").css("display", "none");
+		   
+		   }); 
+			$("#Trgo").on("click", function() {
+		  
+			$("#physctable").css("display", "none");
+		   $("#mathtable").css("display", "");
+		   $("#mathtbl").css("display", "");
+		   
+		   });
+		   $("#testBtn").on("click", function() {
+		 
+			 $(".forTest").removeClass("onDisp").addClass("offDisp");
+			 $("#ansBtn").css("display", "block");
+			 $("#testBtn").css("display", "none");
+		   
+		   
+		   });
+		   $("#ansBtn").on("click", function() {
+			 $(".forTest").removeClass("offDisp").addClass("onDisp");
+			 $("#ansBtn").css("display", "none");
+			 $("#testBtn").css("display", "block");
+		   
+		   
+		   });
+	});
     // Trigo script ends	
 	
 </script>
-</body>
+  
+  </body>
 </html>
