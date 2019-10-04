@@ -34,8 +34,8 @@
   <div class="row">
     
     <div class="col-lg-3" >
-     <div class="card">
-		<div class="card-body">
+     <div class="card" sty>
+		<div class="card-body" id="chemDrill">
 			<h4 class="card-title">Reaction Drill</h4>
 			<form>
 				<div class="form-group">
@@ -43,8 +43,8 @@
 				  <input type="text" class="form-control ans" id="usrFrmla" onkeyup="eval()"><br/>
 				  <input  class="form-control vrfans" id="frmla" style="display:none">
 				</div>
-				<!-- <button type="button" id="nxtbtn" class="btn btn-link">Next</button>  -->
-		        <button type="button" id="strtbtn" class="btn btn-link" onclick="strtDrl()">Start</button>
+				<!-- <button type="button" id="nxtbtn" class="btn btn-link">Next</button> 
+		        <button type="button" id="strtbtn" class="btn btn-link" onclick="strtDrl()">Start</button>  -->
 			</form>
 		</div>
       </div>
@@ -260,12 +260,13 @@ $.ajax({
     dataType: 'jsonp'
 }); 		
 		
-    function strtDrl(){
+    $("#chemDrill").click(function() {
+	//function strtDrl(){
 	    $("label[for='usr']").text(frmlaList[0].unit);
 		 $('#frmla').val(frmlaList[0].formula);
 		 $('#usrFrmla').val(frmlaList[0].wrngFrmla); 
-		 		  
-	}
+	});	 		  
+	//}
 		 	
 	// Started: Eval Logic 	
 		function eval(){
