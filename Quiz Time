@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <!-- CSS -->
+     <style>
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .offDisp{
+     display:none;
+  }
+  .onDisp{
+     display:block;
+  }
+   
+  </style>
+  <!-- end CSS -->
+</head>
+<body>
+
+<div class="jumbotron text-center">
+  <h1>Quiz Time</h1>
+</div>
+  
+<div class="container">
+  <div class="row">
+    
+    <div class="col-lg-3" >
+     <div class="card">
+		<div class="card-body">
+			<h4 class="card-title">Reaction Drill</h4>
+			<form>
+				<div class="form-group">
+				  <label for="usr">Fill Formula:</label>
+				  <input type="text" class="form-control ans" id="usrFrmla"><br/>
+				  <input  class="form-control vrfans" id="frmla" style="display:none">
+				</div>
+				<button type="button" id="nxtbtn" class="btn btn-link">Next</button>
+		
+			</form>
+		</div>
+      </div>
+	  <div class="card">
+		<div class="card-body">
+			<h4 class="card-title">Funda Check</h4>
+			   <!-- Carousel -->
+				<div id="demo" class="carousel slide" data-ride="carousel">
+				  <ul class="carousel-indicators">
+					<li data-target="#demo" data-slide-to="0" class="active"></li>
+					<li data-target="#demo" data-slide-to="1"></li>
+					<li data-target="#demo" data-slide-to="2"></li>
+				  </ul>
+				  <div class="carousel-inner" class="text-center">
+					<div class="carousel-item active">
+					  <p class="text-center">A</p>
+					  <div class="carousel-caption">
+						<h3>Los Angeles</h3>
+						<p>We had such a great time in LA!</p>
+					  </div>   
+					</div>
+					<div class="carousel-item">
+					        <p class="text-center">B</p>
+					  <div class="carousel-caption">
+						<h3>Chicago</h3>
+						<p>Thank you, Chicago!</p>
+					  </div>   
+					</div>
+					<div class="carousel-item" >
+					  <p class="text-center">C</p>
+					  <div class="carousel-caption">
+						<h3>New York</h3>
+						<p>We love the Big Apple!</p>
+					  </div>   
+					</div>
+				  </div>
+				  <a class="carousel-control-prev" href="#demo" data-slide="prev" style="background-color:green">
+					<span class="carousel-control-prev-icon"></span>
+				  </a>
+				  <a class="carousel-control-next" href="#demo" data-slide="next" style="background-color:green">
+					<span class="carousel-control-next-icon"></span>
+				  </a>
+				</div>
+			   <!-- Carsousel End --> 
+		</div>
+      </div>
+    </div>
+    <div class="col-lg-9">
+       <div class="card">
+		<div class="card-body">
+			<h4 class="card-title">Formulae Handy</h4>
+			 <div class="dropdown">
+
+				<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose Subject </button>
+				<ul class="dropdown-menu">
+			   <li><a href="#" id="elctrcity">Electricity</a></li>
+				  
+				  <li><a href="#" id="mgntsm">Magnetism</a></li>
+			   <!-- math menu -->
+
+			   
+			   <li><a href="#" id="Trgo">Trigo</a></li>
+				</ul>
+			  </div><br/>
+			   <div id="physctable"> 
+			  
+				
+			   <table id ="elcTbl" style="display:none" class="table table-striped table-bordered table-hover table-condensed">
+			   <caption>Electricity</caption>
+			  <thead title="Tab">
+				<tr>
+			   <th>Quantity</th>
+			   <th>Formula</th>
+			   <th>Unit</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				<tr>
+			   <td>Energy(H)</td>
+			   <td>I<sup>2</sup>IRT</td>
+			   <td>Joule(J)</td>
+				</tr>
+				<tr>
+			   <td>Charge(Q)</td>
+			   <td>IT</td>
+			   <td>Ampere(A)</td>
+				</tr>
+				<tr>
+			   <td>Force(F)</td>
+			   <td>ma</td>
+			   <td>Newton(N)</td>
+				</tr>
+			  </tbody>
+			   </table>
+				<table id ="mgntTbl" style="display:none" class="table table-striped table-bordered table-hover table-condensed">
+			  <caption>Magnetism</caption>
+			  <thead>
+				<tr>
+			   <th>Quantity</th>
+			   <th>Formula</th>
+			   <th>Unit</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				<tr>
+			   <td>Magnetic Field(B)</td>
+			   <td>q(VXB)</td>
+			   <td>Joule(J)</td>
+				</tr>
+				<tr>
+			   <td>MLF</td>
+			   <td>IT</td>
+			   <td>Ampere(A)</td>
+				</tr>
+				<tr>
+			   <td>Force(F)</td>
+			   <td>ma</td>
+			   <td>Newton(N)</td>
+				</tr>
+			  </tbody>
+			   </table>
+			  </div>
+			  <div class="mathtable" >
+			  
+				 <table id ="mathtbl"   class="table table-striped table-bordered table-hover table-condensed">    
+			 <caption>Trigo</caption>
+			  <thead>
+				<tr>
+			   <th>Angle</th>
+			   <th>0°</th>
+			   <th>30°</th> 
+			   <th>45°</th>
+			   <th>60°</th>
+			   <th>90°</th>
+				</tr>
+			  </thead>
+			  <tbody > 
+				<tr >
+			   <td >Sinθ</td>
+			   <td  > <span class="forTest" >0</span></td>
+			   <td> <span class="forTest">1/2</span> </td> 
+			   <td><span class="forTest">1/√2</span></td>
+			   <td><span class="forTest">√3/2</span></td>
+			   <td><span class="forTest">1</span></td>
+				</tr>
+				<tr>
+			   <td>Cosθ</td>
+			   <td><span class="forTest">1</span></td>
+			   <td><span class="forTest">√3/2</span></td> 
+			   <td><span class="forTest">1/√2</span></td>
+			   <td><span class="forTest">1/2</span></td>
+			   <td><span class="forTest">0</span></td>
+				</tr>
+				<tr>
+			   <td>Tanθ</td>
+			   <td><span class="forTest">0</span></td>
+			   <td><span class="forTest">1/√3</span></td> 
+			   <td><span class="forTest">1</span></td>
+			   <td><span class="forTest">√3</span></td>
+			   <td><span class="forTest">Undefined</span></td>
+			  </tr>
+			   </tbody> 
+			 </table>
+			 <button id="testBtn" class="btn btn-warning" style="display:block" type="button">Take Test </button>
+			 <button id="ansBtn"  class="btn btn-success " type="button"  style="display:none"> Show Ans </button>
+			  </div>
+		</div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <script source="">
+  </script>
+<script>
+		var count=0;
+		var frmlaList= new Array();
+		var myobj;
+		myobj= new Object();
+		myobj.unit= 'Water'
+		myobj.formula='H20';
+		myobj.wrngFrmla="";
+
+		frmlaList.push(myobj);
+
+		myobj= new Object();
+		myobj.unit= 'Calcium Carbonate'
+		myobj.formula='CaCo3';
+		myobj.wrngFrmla="";
+
+		frmlaList.push(myobj);
+		myobj= new Object();
+		myobj.unit= 'Hydrocholric Acide'
+		myobj.formula='HCL';
+		myobj.wrngFrmla="";
+		frmlaList.push(myobj);
+
+		 $("label[for='usr']").text(frmlaList[0].unit);
+		 $('#frmla').val(frmlaList[0].formula);
+		 $('#usrFrmla').val(frmlaList[0].wrngFrmla); 
+		   $(document).ready(function(){
+			
+			 $("#nxtbtn").click(function() {
+				var _txt1 = $('#usrFrmla').val();
+				var _txt2 = $('#frmla').val();
+				
+				console.log('count::'+count);
+					if (_txt1 == _txt2){
+					count++;
+					console.log('count1::'+count);
+						   if(count+1<=frmlaList.length){
+							console.log('count3::'+count)
+								  $("label[for='usr']").text(frmlaList[count].unit);
+								  
+								 $('#frmla').val(frmlaList[count].formula);
+								 $('#usrFrmla').val(frmlaList[count].wrngFrmla); 
+								 return true;
+							}else{
+							console.log('Game Over');
+							}	 
+						}
+					  else
+					  {
+						console.log('Not matched!!');
+						return false;
+					  }
+				  });
+			});
+			
+			// Timer 
+			
+			var sec = 15;
+		var time = setInterval(myTimer, 1000);
+
+		function myTimer() {
+			document.getElementById('timer').innerHTML = sec + "sec left";
+			sec--;
+			if (sec == -1) {
+				clearInterval(time);
+				alert("Time out!! :(");
+			}
+		}
+	// Trigo script
+	    $(document).ready(function(){
+ 
+   $("#elctrcity").on("click", function() {
+  $("#physctable").css("display", "");
+    $("#elcTbl").css("display", "");
+   $("#mgntTbl").css("display", "none");
+   $("#mathtbl").css("display", "none");
+   $("#mathtable").css("display", "none");
+   });
+   $("#mgntsm").on("click", function() {
+  $("#physctable").css("display", "");
+    $("#mgntTbl").css("display", "");
+    $("#elcTbl").css("display", "none");
+    $("#mathtbl").css("display", "none");
+    
+    $("#mathtable").css("display", "none");
+   
+   }); 
+    $("#Trgo").on("click", function() {
+  
+    $("#physctable").css("display", "none");
+   $("#mathtable").css("display", "");
+   $("#mathtbl").css("display", "");
+   
+   });
+   $("#testBtn").on("click", function() {
+ 
+     $(".forTest").removeClass("onDisp").addClass("offDisp");
+     $("#ansBtn").css("display", "block");
+     $("#testBtn").css("display", "none");
+   
+   
+   });
+   $("#ansBtn").on("click", function() {
+     $(".forTest").removeClass("offDisp").addClass("onDisp");
+     $("#ansBtn").css("display", "none");
+     $("#testBtn").css("display", "block");
+   
+   
+   });
+ });
+    // Trigo script ends	
+	
+</script>
+</body>
+</html>
