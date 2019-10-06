@@ -1,0 +1,124 @@
+<!DOCTYP html>
+<html>
+ <head>
+ 
+ 
+ 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+ </head>
+<body> 
+	<div class="container-fluid">
+	    <div class="row">
+            <div class="col-sm-3">
+			  
+			</div>
+		    <div class="card text-white bg-info mb-3"  class="col-sm-9" style="width: 40%";>
+			  <div class="card-header">Fill Your Form!!</div>
+				  <div class="card-body">
+						<form>
+							  <div class="row">
+								<div class="form-group col-md-9">
+								  <label for="inputEmail4">Source of Income</label>
+									<div class="col-xs-7">
+									  <select class="form-control" name="select1" id="select1">
+										<option value="1">Job-Private</option>
+										<option value="2">Job-Govt</option>
+										<option value="3">Business</option>
+										<option value="4">Pension</option>
+										<option value="5">Agriculture</option>
+										<option value="6">NGO</option>
+									  </select>
+									</div> </br></br>
+									<div class="col-xs-7">
+									  <label for="inputEmail4">Holding Investment</label>
+									  <select class="form-control" name="select2" id="select2">
+										<option value="1">Other-1</option>
+										<option value="2">Other-2</option>
+										<option value="3">Other-3</option>
+										<option value="4">Other-4</option>
+										<option value="5">Other-5</option>
+										<option value="6">Other-6</option>
+										<option value="1">LIC- any company</option>
+										<option value="2">Mutual Fund</option>
+										<option value="3">PF</option>
+										<option value="4">NPS</option>
+										<option value="5">Other</option>
+										<option value="6">Educational Loan</option>
+									  </select>
+									</div> </br></br>
+									<div class="col-xs-7">
+									  <label for="inputEmail4">Income in Lakh</label>
+									  <select class="form-control" name="select3" id="select3">
+									    <option value="1">less than 5</option>
+										<option value="2">5-10</option>
+										<option value="3">10-15</option>
+										<option value="4">15-20</option>
+										<option value="5">20-30</option>
+										<option value="6">Above 30</option>
+									  </select>
+									</div>
+								</div>
+							</div>  
+						</form>
+				  </div>
+				  <div class="card-footer">
+				    <div class="custom-control custom-switch">
+					  <input type="checkbox" class="custom-control-input" id="switch1" name="example">
+					  <label class="custom-control-label" for="switch1">Accept Condition</label>
+					</div>
+					<label class="btn btn-default">
+						 Submit Documents:
+						 <div class="custom-file mb-3" >
+						  <input type="file" class="custom-file-input" id="customFile" name="filename" disabled>
+						  <label class="custom-file-label" for="customFile">Choose file</label>
+						</div>
+					</label>
+				   
+				 </div>
+		    </div>
+		
+		</div>
+	</div>
+
+<script>
+
+$("#switch1").click(function() {
+
+	var val= $("#switch1").val();
+	console.log(val);
+	if(val=='on'){
+	       $("#customFile").removeAttr("disabled"); 
+		 }else{
+		    $("#customFile").attr("disabled","True");
+		 }
+	});	
+
+$(".custom-file-input").on("change", function() {
+  var fileName = $(this).val().split("\\").pop();
+  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+});
+
+  var $select1 = $( '#select1' ),
+		$select2 = $( '#select2' ),
+		$select3 = $( '#select3' ),
+    $options = $select2.find( 'option' );
+	$options1 = $select3.find( 'option' );
+    
+$select1.on( 'change', function() {
+	$select2.html( $options.filter( '[value="' + this.value + '"]' ) );
+} ).trigger( 'change' );
+$select2.on( 'change', function() {
+	$select3.html( $options1.filter( '[value="' + this.value + '"]' ) );
+} ).trigger( 'change' );
+</script>	
+</body>
+</html>

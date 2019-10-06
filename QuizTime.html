@@ -40,7 +40,7 @@
 			<form>
 				<div class="form-group">
 				  <label for="usr">Take Your Challenge Now!</label>
-				  <input type="text" class="form-control ans" id="usrFrmla" onkeyup="eval()"><br/>
+				  <input type="text" class="form-control ans" id="usrFrmla" onkeyUp="eval()"><br/>
 				  <input  class="form-control vrfans" id="frmla" style="display:none">
 				</div>
 				<!-- <button type="button" id="nxtbtn" class="btn btn-link">Next</button> 
@@ -221,6 +221,7 @@
     <!-- Reaction Drill Object using Google Sheet -->
 <script>
     var count=0;
+	var drlExctn=false;
 	var frmlaList= new Array();
 	var myobj = {unit:'',formula:'',wrngFrml:''};
 	
@@ -262,9 +263,12 @@ $.ajax({
 		
     $("#chemDrill").click(function() {
 	//function strtDrl(){
-	    $("label[for='usr']").text(frmlaList[0].unit);
+	if(drlExctn==false){
+	     drlExctn=true;
+	     $("label[for='usr']").text(frmlaList[0].unit);
 		 $('#frmla').val(frmlaList[0].formula);
 		 $('#usrFrmla').val(frmlaList[0].wrngFrmla); 
+		 }
 	});	 		  
 	//}
 		 	
