@@ -37,6 +37,7 @@
      <div class="card" sty>
 		<div class="card-body" id="chemDrill">
 			<h4 class="card-title">Reaction Drill</h4>
+			<p1 id='gmOver'> </p1>
 			<form>
 				<div class="form-group">
 				  <label for="usr">Take Your Challenge Now!</label>
@@ -222,6 +223,7 @@
 <script>
     var count=0;
 	var drlExctn=false;
+	var gmOvr=false;
 	var frmlaList= new Array();
 	var myobj = {unit:'',formula:'',wrngFrml:''};
 	
@@ -274,28 +276,33 @@ $.ajax({
 		 	
 	// Started: Eval Logic 	
 		function eval(){
-		 console.log('count1::'+$('#usrFrmla').val());
-			var _txt1 = $('#usrFrmla').val();
-			// var _txt2 = $('#frmla').val();
-				if (_txt1.toUpperCase()  == frmlaList[count].formula.toUpperCase() ){
-				count++;
-				console.log('count1::'+count);
-					   if(count+1<=frmlaList.length){
-						console.log('count3::'+count)
-							  $("label[for='usr']").text(frmlaList[count].unit);
-							  
-							 $('#frmla').val(frmlaList[count].formula);
-							 $('#usrFrmla').val(frmlaList[count].wrngFrmla); 
-							 return true;
-						}else{
-						console.log('Game Over');
-						}	 
-					}
-				  else
-				  {
-					console.log('Not matched!!');
-					return false;
-				  }
+				if(gmOvr==false){
+				   var _txt1 = $('#usrFrmla').val();
+					// var _txt2 = $('#frmla').val();
+						if (_txt1.toUpperCase()  == frmlaList[count].formula.toUpperCase() ){
+						count++;
+						console.log('count1::'+count);
+							   if(count+1<=frmlaList.length){
+								console.log('count3::'+count)
+									  $("label[for='usr']").text(frmlaList[count].unit);
+									  
+									 $('#frmla').val(frmlaList[count].formula);
+									 $('#usrFrmla').val(frmlaList[count].wrngFrmla); 
+									 return true;
+								}else{
+								   gmOvr=true;
+								console.log('Game Over');
+								}	 
+							}
+						  else
+						  {
+							console.log('Not matched!!');
+							return false;
+						  }
+				}else{
+				
+				}
+				
 			}
 	// Ended: Eval Logic  
 	

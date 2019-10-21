@@ -1,0 +1,193 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+          <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  </head>  
+  <body>
+    <div class="jumbotron jumbotron-fluid">
+	   <h1 class="text-center">Maths Drill</h1>
+	   
+	</div> 
+	  <div class="container" ng-app="clcApp" ng-controller="drlCtlr" ng-init="inpt1=2;aVar=true">
+	       <div class="row">
+
+		        <!-- Drill Radio Button Panel -->
+		        <div class="col-xl-4 bg-light">
+			
+					<div class="form-check form-check-inline">
+					  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" ng-click="aVar=true;sVar=false;mVar=false" checked>
+					  <label class="form-check-label" for="inlineRadio1">Add</label>
+					</div>
+					<div class="form-check form-check-inline">
+					  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" ng-click="sVar=true;aVar=false;mVar=false">
+					  <label class="form-check-label" for="inlineRadio2">Substract</label>
+					</div>
+					<div class="form-check form-check-inline">
+					  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" ng-click="mVar=true;sVar=false;aVar=false">
+					  <label class="form-check-label" for="inlineRadio3">Multiply</label>
+					</div>
+															
+					<div class="custom-control custom-radio">
+					<br/>
+					  <input type="radio" class="custom-control-input" id="optdrl" name="optdrl" ng-model="drlopt" value="1x1" checked>
+					  <label class="custom-control-label" for="optdrl">1x1 &nbsp; (0 to 9)x(0 to 9	)</label>
+					</div>
+                   
+					
+					<div class="custom-control custom-radio">
+					  <input type="radio" class="custom-control-input" id="optdrl1" name="optdrl1" value="1x2" ng-model="drlopt">
+					  <label class="custom-control-label" for="optdrl1">1x2 &nbsp; (0 to 9)x(10 to 99)</label>
+					</div>
+					<div class="custom-control custom-radio">
+					  <input type="radio" class="custom-control-input" id="optdrl2" name="optdrl2" value="2x2" ng-model="drlopt" >
+					  <label class="custom-control-label" for="optdrl2">2x2 &nbsp; (10 to 99)x(10 to 99)</label>
+					</div><br/>
+					
+				</div>
+				
+				<!-- Drill Calc ground -->
+				<div class="card col-xl-4">
+				    <div class="card-body text-center bg-primary">
+                        
+						   <div class="col-xl-12 row">
+								<div class="col-xl-5"> <span style="color:white">{{num1}} <span ng-show="mVar">*</span><span ng-show="aVar">+</span> <span ng-show="sVar">-</span>    {{num2}} =</span> </div>
+								<div class="col-xl-7"> 
+								  <input  ng-model="ans" type="number" ng-keyup="(ans ==num1*num2&&mVar==true ? nxtQstn():(ans ==num1+num2&&aVar==true? nxtQstn():(ans ==num1-num2&&sVar==true? nxtQstn():'')))" ng-disabled="(drlopt=='1x1'? false:true)"> 
+								  </input> 
+								</div>
+							</div> </br>
+							<div class="col-xl-12 row">
+								<div class="col-xl-5">
+							    	<span style="color:white">{{num3}} <span ng-show="mVar">*</span><span ng-show="aVar">+</span> <span ng-show="sVar">-</span> {{num4}} = </span> 
+								</div>
+								<div class="col-xl-7">
+									<input ng-model="ans1" type="number" ng-keyup="(ans1 ==num3*num4 && mVar==true ? nxtQstn1():(ans1 ==num3+num4&&aVar==true? nxtQstn1():(ans1 ==num3-num4&&sVar==true? nxtQstn1():'')))" ng-disabled="(drlopt=='1x2'? false:true)"> 
+									</input> 
+								</div>
+							</div> </br>
+							<div class="col-xl-12 row">
+								<div class="col-xl-5">
+								  <span style="color:white">{{num5}} <span ng-show="mVar">*</span><span ng-show="aVar">+</span> <span ng-show="sVar">-</span> {{num6}} = </span>
+								</div>
+								<div class="col-xl-7">
+								<input ng-model="ans2" type="number" ng-keyup="(ans2 ==num5*num6&&mVar==true ? nxtQstn2():(ans2 ==num5+num6&&aVar==true? nxtQstn2():(ans2 ==num5-num6&&sVar==true? nxtQstn2():'')))" ng-disabled="(drlopt=='2x2'? false:true)"> 
+								  </input>
+								</div>
+							</div>  
+						
+					</div>  
+				</div>
+				<div class="col-xl-4">
+				   <b><p id="cntr"></p></b>
+				  
+				   
+				</div>
+				
+			</div>	
+		 <br/>  <div class="row"> 
+		      <div class="col-xl-5">
+			  </div>
+		      <div >
+					 <button type="button" class="btn btn-warning" ng-click="strtCntr()" ng-disabled="(drlopt=='2x2'||drlopt=='1x2'||drlopt=='1x1'? false:true)"><b>Go!</b></button>
+			  </div>
+		   </div> 	
+	  </div>
+	   
+	   <!-- Maths Memory game Starts -->
+	   
+      <div class="container" ng-app="mmryApp" ng-controller="mmryAppCtlr" ng-init="">
+	    <b> Math Memory Game </b>
+	  </div>
+	   <!-- Maths Memory game End -->
+	   
+	   <script  type="text/javascript">
+	    // Maths Memory Game App Script	 Starts	
+		  
+		  var mapp = angular.module("mmryApp",[]);
+		  
+		  mapp.controller("mmryAppCtlr", function($scope){
+		     alert('hello');
+		  
+		  });
+		  
+		 // Maths Memory Game App Script Ends
+	   // Calculation App Script
+	   
+	     var app = angular.module("clcApp",[]);
+		 
+		 app.controller("drlCtlr",function($scope){
+		    
+			 
+			 $scope.num1=1;  
+			 $scope.num2= 9;
+			 
+			 $scope.num3=42;  
+			 $scope.num4= 9;
+			 
+			 $scope.num5=10;  
+			 $scope.num6= 99;
+			 
+			 $scope.nxtQstn = function(){
+			    
+				 
+			     $scope.num2= Math.floor(Math.random() * 10);
+				 $scope.num1= Math.floor(Math.random() * 10);
+				 $scope.ans='';
+			 };
+			 $scope.nxtQstn1 = function(){
+			     $scope.num3= Math.floor(Math.random() * 100);
+				 $scope.num4= Math.floor(Math.random() * 10);
+				 $scope.ans1='';
+			 };
+			 $scope.nxtQstn2 = function(){
+			     $scope.num5= Math.floor(Math.random() * 100);
+				 $scope.num6= Math.floor(Math.random() * 100);
+				 $scope.ans2='';
+			 };
+			 
+			$scope.strtCntr = function(){ 
+						// Countdown Script starts
+			   
+					// Set the date we're counting down to
+					
+					var countDownDate = new Date("Jan 18, 2017 14:37:25").getTime();
+
+					// Update the count down every 1 second
+					var x = setInterval(function() {
+
+					  // Get today's date and time
+					  var now = new Date().getTime();
+
+					  // Find the distance between now and the count down date
+					  var distance = countDownDate - now;
+
+					  // Time calculations for days, hours, minutes and seconds
+					 // var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+					  //var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+					  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+					  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                       
+					  // Display the result in the element with id="demo"
+					  document.getElementById("cntr").innerHTML = minutes + "m " + seconds + "s ";
+
+					  // If the count down is finished, write some text
+					  if (distance < 0) {
+						clearInterval(x);
+						document.getElementById("cntr").innerHTML = "Time Up!!";
+					  }
+					}, 1000);
+			
+			// Countdown Script end	
+			}
+		 });
+	     // Calculation App Script Ends
+		 
+        
+		  
+	 </script>
+  </body>
+</html>
